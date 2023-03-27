@@ -3,11 +3,12 @@
 #include<stdio.h>
 #include<math.h>
 #include<malloc.h>
-
+#include<string.h>
+#include<stdlib.h>
 
 enum str
 {
-	
+
 
 };
 
@@ -18,7 +19,7 @@ typedef enum Status
 	SUCCESS = 1
 } Status;
 
-typedef int ElemType;
+typedef char ElemType;
 
 typedef  struct StackNode
 {
@@ -33,8 +34,9 @@ typedef  struct  LinkStack
 }LinkStack;
 
 
-Status initLStack(LinkStack* s);//³õÊ¼»¯Õ»
-Status isEmptyLStack(LinkStack* s);//ÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
-Status pushLStack(LinkStack* s, ElemType data);//ÈëÕ»
-Status popLStack(LinkStack* s, ElemType* data);//³öÕ»
-Status traverseLStack(LinkStack* s);//±éÀú
+Status initLStack(LinkStack* s);//åˆå§‹åŒ–æ ˆ
+Status isEmptyLStack(LinkStack* s);//åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
+Status pushLStack(LinkStack* s, ElemType data);//å…¥æ ˆ
+Status popLStack(LinkStack* s, ElemType* data);//å‡ºæ ˆ
+Status traverseLStack(LinkStack* s);//éå†
+int is_priority(char str);
