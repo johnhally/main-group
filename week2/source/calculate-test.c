@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS 1
 #include"calculate.h"
 
 //(  ,  )  ,  *  ,  +  ,  -  ,  /  ,  <  ,  =  ,  > 
@@ -7,59 +6,48 @@
 int main()
  {
 	LinkStack ele;
-	initLStack(&ele);  //³õÊ¼»¯Õ»
+	initLStack(&ele);  //åˆå§‹åŒ–æ ˆ
 
 
-	// ÊäÈëÊı¾İ
+	// è¾“å…¥æ•°æ®
 
-	int i = 0;    //ÓÃÓÚÑ­»·
-	int num = 0;  //×Ö·ûÊı
-	char arr[128] = { 0 };  //´æ´¢×Ö·ûµÄ±äÁ¿
-	char arr_gain[128] = { 0 }; //´æ´¢³öÕ»×Ö·ûµÄ±äÁ¿
+	int num = 0;  //å­—ç¬¦æ•°
+	char arr[128] = { 0 };  //å­˜å‚¨å­—ç¬¦çš„å˜é‡
+	char arr_gain[128] = { 0 }; //å­˜å‚¨å‡ºæ ˆå­—ç¬¦çš„å˜é‡
 
-	printf("ÇëÈ·ÈÏÄãÊäÈëµÄ±í´ïÊ½×Ü¹²ÓĞ¶àÉÙ¸ö×Ö·û\n");
-	printf("Æ­ĞÖµÜ¿ÉÒÔ£¬Õæ±ğÆ­×Ô¼º\n");
-	scanf_s("%d", &num);
-	printf("Çë°´Ë³ĞòÒ»Î»Ò»Î»µØÊäÈë×Ö·û,ÇĞÎğÒ»´ÎĞÔÊäÈë¶àÎ»Êı\n");
-	getchar();
-
-	for (int i = 0; i < num; i++)
-	{
-		arr[i] = getchar();
-		printf("ÊäÈëµÄÊı¾İÔÙ´Î³ÊÏÖ£º%c  \n", arr[i]);
-		getchar();
-	}
-	printf("%s\n", arr);
+	printf("è¯·è¾“å…¥è¡¨è¾¾å¼\n");
+	scanf("%s", arr);
+	num = strlen(arr);
+	
 
 
 
-	//ÅĞ¶ÏÎ»Êı
 
-	int count = num; // ¾ö¶¨ÊÇ·ñÑ­»·£¬Æä´óĞ¡Îª×Ö·ûµÄÊıÄ¿
-	int ret = 0;    //  µ¥Î»ÊıµÄÖµ£¬ÓÃÓÚ´æÈëÕ»
-	int temp = 0;   //  ¶àÎ»ÊıµÄÖµ£¬ÓÃÓÚ´æÈëÕ»
-	int gain = 0;   //  ÓÃÀ´»ØÊÕ£¬³öÕ»µÄÖµ
-	int n = 0;      //  ÈëÕ»±äÁ¿µÄÏÂ±êĞòÁĞ
-	int j = 0;      //  ÖĞ¼ä±äÁ¿µÄÏÂ±ê£¬·ÀÖ¹¸Ä±äÏÂ±ê
-	int k = 0;      // ÔÚ¶àÎ»ÊıÅĞ¶ÏÖĞ£¬ÓÃÀ´¼ÆËã10µÄ´Î·½Êı
+	//åˆ¤æ–­ä½æ•°
+	int count = num; // å†³å®šæ˜¯å¦å¾ªç¯ï¼Œå…¶å¤§å°ä¸ºå­—ç¬¦çš„æ•°ç›®
+	char temp = 0;   //  å¤šä½æ•°çš„å€¼ï¼Œç”¨äºå­˜å…¥æ ˆ
+	char gain = 0;   //  ç”¨æ¥å›æ”¶ï¼Œå‡ºæ ˆçš„å€¼
+	int n = 0;      //  å…¥æ ˆå˜é‡çš„ä¸‹æ ‡åºåˆ—
+	int j = 0;      //  ä¸­é—´å˜é‡çš„ä¸‹æ ‡ï¼Œé˜²æ­¢æ”¹å˜ä¸‹æ ‡      ç”¨äºå¤šä½æ•°çš„åˆ¤æ–­ï¼Œä½†æ˜¯æ— æ³•è§£å†³å¦‚ä½•å°†å¤šä½æ•°æ— ç”¨äº†ï¼Œ
+	int k = 0;      // åœ¨å¤šä½æ•°åˆ¤æ–­ä¸­ï¼Œç”¨æ¥è®¡ç®—10çš„æ¬¡æ–¹æ•°  ç”¨äºå¤šä½æ•°çš„åˆ¤æ–­ï¼Œä½†æ˜¯æ— ç”¨äº†
+	int a = 0;      //å‡ºæ ˆå˜é‡çš„ä¸‹æ ‡åºåˆ—
+	int b = 0;
 
-	int a = 0;      //³öÕ»±äÁ¿µÄÏÂ±êĞòÁĞ
 
-
-	while (count>0)
+	while (count > 0)
 	{
 
-		if (arr[n] > '0' && arr[n] <= '9' && arr[n + 1] >= '0' && arr[n + 1] <= '9')     // ±í´ïÊ½Îª¶àÎ»Êı×Ö   
+		if (arr[n] > '0' && arr[n] <= '9' && arr[n + 1] >= '0' && arr[n + 1] <= '9')     // è¡¨è¾¾å¼ä¸ºå¤šä½æ•°å­—   
 		{
-			j = n;   //  ÖĞ¼ä±äÁ¿µÄÏÂ±ê£¬·ÀÖ¹¸Ä±äÏÂ±ê
-			while (arr[n+1] >= '0' && arr[n+1] <= '9')   //ÓÃÀ´ÅĞ¶Ï ÊäÈëµÄÊÇ¼¸Î»Êı
+			j = n;   //  ä¸­é—´å˜é‡çš„ä¸‹æ ‡ï¼Œé˜²æ­¢æ”¹å˜ä¸‹æ ‡
+			while (arr[n + 1] >= '0' && arr[n + 1] <= '9')   //ç”¨æ¥åˆ¤æ–­ è¾“å…¥çš„æ˜¯å‡ ä½æ•°
 			{
 				n++;
-				k++; 
+				k++;
 			}
 			while (j <= n)
 			{
-				int h = pow(10, k);    // hÎª10^k´Î·½
+				int h = pow(10, k);    // hä¸º10^kæ¬¡æ–¹
 				temp += (arr[j] - 48) * h;
 				k--;
 				j++;
@@ -67,49 +55,71 @@ int main()
 			}
 			k = 0;
 			n++;
-			pushLStack(&ele, temp); //ÊıÈëÕ»
-			traverseLStack(&ele);
-			popLStack(&ele, &gain);  //³öÕ»
+			pushLStack(&ele, temp); //æ•°å…¥æ ˆ
+			popLStack(&ele, &gain);  //å‡ºæ ˆ
 
 			arr_gain[a] = gain;
 			a++;
 			temp = 0;
 		}
-		else if (arr[n] > '0' && arr[n] <= '9')   //  Îªµ¥Î»Êı
+		else if (arr[n] > '0' && arr[n] <= '9')   //  ä¸ºå•ä½æ•°
 		{
-			ret = arr[n] - 48;
-			pushLStack(&ele, ret);   //ÊıÈëÕ»
+			pushLStack(&ele,arr[n]);   //æ•°å…¥æ ˆ
 			count--;
 			n++;
-			traverseLStack(&ele);     //±éÀú
-			popLStack(&ele, &gain);   //³öÕ»
+			popLStack(&ele, &gain);   //å‡ºæ ˆ
 
 			arr_gain[a] = gain;
 			a++;
 
 		}
-		else if (arr[n] == '+' || arr[n] == '-' || arr[n] == '*' || arr[n] == '(' || arr[n] == ')' || arr[n] == '/')  //±í´ïÊ½Îª²Ù×÷·û
+		else if (arr[n] == '+' || arr[n] == '-' || arr[n] == '*' || arr[n] == '(' || arr[n] == ')' || arr[n] == '/')  //è¡¨è¾¾å¼ä¸ºæ“ä½œç¬¦
 		{
-			int a = arr[n];     //ÓÃASCIIÂëÖµ´úÌæ²Ù×÷·û
-			pushLStack(&ele, a);  // ²Ù×÷·ûÈëÕ»
+			pushLStack(&ele, arr[n]);  // æ“ä½œç¬¦å…¥æ ˆ
 			n++;
 			count--;
-			traverseLStack(&ele);  //±éÀú
 		}
 
 	}
 
-	//²Ù×÷·û³öÕ»
+	//æ“ä½œç¬¦å‡ºæ ˆ
 	for (; a < num; a++)
 	{
-		popLStack(&ele, &gain); 
+		popLStack(&ele, &gain);
 		arr_gain[a] = gain;
-		a++;
+		traverseLStack(&ele);  //éå†
 	}
-	for (int b = 0; b < a; b++)
+	printf("è¡¨è¾¾å¼å˜æˆ:\n");
+	for ( b = 0; b < a; b++)
 	{
-		putchar(arr_gain[b]);  //ÖĞ×º±í´ïÊ½
+		printf("%c ", arr_gain[b]);
 	}
+
+
+
+	int ret = 0;
+	b = 0;
+	a = 0;
+	for (b = 0; b <num ; b++)
+	{
+		ret = is_priority(arr[b]);
+		temp = is_priority(arr[b + 1]);
+	
+		if (ret > temp || ret == temp )                               //å¦‚æœä¼˜å…ˆçº§ç›¸åŒï¼ˆå…¨ä¸ºæ•°å­—ä¹Ÿè®¤å®šä¸ºä¼˜å…ˆçº§ç›¸åŒï¼‰æˆ– ä¼˜å…ˆçº§æ›´é«˜ï¼Œå…¥æ ˆ
+		{                                                             
+			pushLStack(&ele, arr_gain[b]);
+		}
+		else
+		{
+			popLStack(&ele, &gain);                      //å¦‚æœä¼˜å…ˆçº§ä½ï¼Œtopå…ˆå‡ºæ ˆï¼Œå†å…¥æ ˆ
+			pushLStack(&ele, arr_gain[b]);
+
+		}
+		pushLStack(&ele, arr_gain[b]);
+
+	}
+
+
 
 
 
@@ -117,13 +127,3 @@ int main()
 	return 0;
 }
  
-
-
-
-
-
-
-
-
-	
-		
