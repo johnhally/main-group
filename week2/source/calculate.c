@@ -1,7 +1,7 @@
 #include"calculate.h"
 
 
-//³õÊ¼»¯Õ»
+//åˆå§‹åŒ–æ ˆ
 Status initLStack(LinkStack* s) {
 	LinkStackPtr temp = (LinkStackPtr)malloc(sizeof(LinkStackPtr));
 	if (!temp)
@@ -15,7 +15,7 @@ Status initLStack(LinkStack* s) {
 	return SUCCESS;
 }
 
-//ÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
+//åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
 Status isEmptyLStack(LinkStack* s) {
 	if (!s->top)
 		return ERROR;
@@ -23,7 +23,7 @@ Status isEmptyLStack(LinkStack* s) {
 		return SUCCESS;
 }
 
-//ÈëÕ»
+//å…¥æ ˆ
 Status pushLStack(LinkStack* s, ElemType data) {
 	LinkStackPtr temp = (LinkStackPtr)malloc(sizeof(LinkStackPtr));
 	if (!temp)
@@ -37,7 +37,7 @@ Status pushLStack(LinkStack* s, ElemType data) {
 	return SUCCESS;
 }
 
-//³öÕ»
+//å‡ºæ ˆ
 Status popLStack(LinkStack* s, ElemType* data) {
 	if (!isEmptyLStack(s))
 		return ERROR;
@@ -52,19 +52,51 @@ Status popLStack(LinkStack* s, ElemType* data) {
 	return SUCCESS;
 }
 
-//±éÀú
+//éå†
 Status traverseLStack(LinkStack* s)
 {
 	if (!isEmptyLStack(s))
 		return ERROR;
 	LinkStackPtr temp = s->top;
-	printf("À´°É£¬Õ¹Ê¾\n");
+	printf("æ¥å§ï¼Œå±•ç¤º\n");
 	while (temp)
 	{
-		printf("%7d\n", temp->data);
+		printf("%7c\n", temp->data);
 		temp = temp->next;
 	}
 
 }
 
+
+int is_priority(char str)
+{
+	do
+	{
+		switch (str)
+		{
+		case '+':
+			return 2;
+			break;
+		case '-':
+			return 2;
+			break;
+		case'*':
+			return 3;
+			break;
+		case'/':
+			return 3;
+			break;
+		case'(':
+			return 1;
+			break;
+		case')':
+			return 4;
+			break;
+		default:
+			return 0;
+			break;
+		}
+	} while (1);
+
+}
 
